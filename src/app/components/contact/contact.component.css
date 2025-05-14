@@ -1,0 +1,24 @@
+body {
+  background: url('https://source.unsplash.com/1600x900/?perfume,bottles') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.btn-dark {
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-dark:hover {
+  background-color: #6a1b9a;
+  color: white;
+  transform: scale(1.05);
+}
+
+.input-group-text {
+  background-color: #6a1b9a;
+  color: white;
+  border: none;
+}

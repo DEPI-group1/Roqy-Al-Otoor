@@ -1,0 +1,71 @@
+<div class="container py-5">
+  <h3 class="mb-4 text-center fw-bold">طلباتي</h3>
+
+  <!-- لو مفيش طلبات -->
+  <div *ngIf="orders.length === 0" class="text-center text-muted">
+    لا توجد طلبات حالياً
+  </div>
+
+  <!-- عرض الطلبات -->
+  <div
+    *ngFor="let order of orders"
+    class="order-card mb-4 p-3 border rounded shadow-sm"
+  >
+    <div
+      class="d-flex justify-content-between align-items-center order-flex flex-wrap"
+    >
+      <div>
+        <h6 class="mb-1">رقم الطلب: #{{ order.id }}</h6>
+        <small class="text-muted"
+          >تاريخ الطلب: {{ order.created_at | date : "d MMMM y" }}</small
+        >
+      </div>
+      <div>
+        <span
+          class="order-status"
+          [ngClass]="{
+            'status-pending': order.order_status === 'pending',
+            'status-processing': order.order_status === 'processing',
+            'status-shipped': order.order_status === 'shipped',
+            'status-delivered': order.order_status === 'delivered',
+            'status-canceled': order.order_status === 'canceled'
+          }"
+        >
+          {{ order.order_status }}
+        </span>
+      </div>
+    </div>
+
+    <hr />
+
+    <!-- عرض العناصر -->
+    <div
+      *ngFor="let item of order.items"
+      class="d-flex align-items-center gap-3 flex-wrap mb-2"
+    >
+      <img
+        [src]="
+          'http://127.0.0.1:8000/storage/products/' + item.product_image ||
+          'https://via.placeholder.com/60'
+        "
+        class="product-img"
+        alt="منتج"
+        width="60"
+      />
+      <div>
+        <strong>{{ item.product_name }}</strong
+        ><br />
+        <small class="text-muted">الكمية: {{ item.quantity }}</small>
+      </div>
+    </div>
+
+    <div
+      class="d-flex justify-content-between align-items-center mt-3 flex-wrap"
+    >
+      <div><strong>الإجمالي:</strong> {{ order.total_amount }} جنيه</div>
+      <div>
+        <a href="#" class="btn btn-outline-primary btn-sm">عرض التفاصيل</a>
+      </div>
+    </div>
+  </div>
+</div>

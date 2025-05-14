@@ -1,0 +1,64 @@
+body {
+  background-color: #f9f9fb;
+  font-family: "Cairo", sans-serif;
+}
+
+.order-card {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+  margin-bottom: 20px;
+  transition: 0.3s;
+}
+
+.order-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.order-status {
+  padding: 5px 12px;
+  border-radius: 50px;
+  font-size: 14px;
+}
+
+.status-pending {
+  color: orange;
+  background-color: rgb(61, 39, 7);
+
+}
+
+.status-processing {
+  color: rgb(2, 136, 177);
+
+}
+
+.status-shipped {
+  color: rgb(1, 255, 1);
+}
+
+.status-delivered {
+  color: rgb(7, 145, 7);
+}
+
+.status-canceled {
+  color: red;
+}
+
+.product-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .order-flex {
+    flex-direction: column;
+    align-items: start !important;
+  }
+  .order-flex > div {
+    margin-bottom: 10px;
+  }
+}

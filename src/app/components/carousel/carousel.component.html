@@ -1,0 +1,62 @@
+<!-- <div
+  id="carouselExample"
+  class="carousel slide mt-4 container"
+  data-bs-ride="carousel"
+  *ngIf="carouselImages.length > 0"
+>
+  <div class="carousel-inner">
+    <div
+      *ngFor="let img of carouselImages; let i = index"
+      class="carousel-item"
+      [class.active]="i === 0"
+    >
+      <img
+        [src]="img.image"
+        class="d-block w-100"
+        [alt]="img.location || 'صورة السلايدر'"
+      />
+    </div>
+  </div>
+
+  <button
+    class="carousel-control-prev"
+    type="button"
+    data-bs-target="#carouselExample"
+    data-bs-slide="prev"
+  >
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button
+    class="carousel-control-next"
+    type="button"
+    data-bs-target="#carouselExample"
+    data-bs-slide="next"
+  >
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div> -->
+
+
+<div class="carousel-container" *ngIf="carouselImages.length > 0">
+  <div class="carousel">
+    <div *ngFor="let img of carouselImages; let i = index" 
+         class="slide" 
+         [class.active]="i === currentIndex"
+         [style.background-image]="'url(' + img.image + ')'">
+    </div>
+    
+    <button class="control prev" (click)="prevSlide()">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="control next" (click)="nextSlide()">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+    
+    <div class="indicators">
+      <button *ngFor="let img of carouselImages; let i = index" 
+              (click)="goToSlide(i)"
+              [class.active]="i === currentIndex">
+      </button>
+    </div>
+  </div>
+</div>

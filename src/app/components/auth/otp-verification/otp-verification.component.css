@@ -1,0 +1,108 @@
+.otp-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.otp-header {
+  margin-bottom: 2rem;
+}
+
+.otp-header h2 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.otp-header p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.otp-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 2rem 0;
+}
+
+.otp-inputs input {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 1.2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.otp-inputs input:focus {
+  border-color: #4285f4;
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+}
+
+.otp-inputs input.error {
+  border-color: #ea4335;
+}
+
+.verify-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.verify-btn:hover:not(:disabled) {
+  background-color: #3367d6;
+}
+
+.verify-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #ea4335;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+
+.resend-otp {
+  margin-top: 1.5rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.resend-otp span {
+  color: #4285f4;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.resend-otp span.disabled {
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .otp-container {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  
+  .otp-inputs input {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}

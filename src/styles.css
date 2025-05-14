@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  direction: rtl;
+}
+
+.snackbar-success {
+  background-color: #4caf50 !important;
+  color: white;
+}
+
+.snackbar-error {
+  background-color: #f44336 !important;
+  color: white;
+}
+
+.swiper {
+  width: 100%;
+  height: auto;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-typography {
+  flex: 1;
+}

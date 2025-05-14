@@ -1,0 +1,11 @@
+.footer {
+  direction: rtl;
+  background-color: #5a3e36;
+  color: #f3e5ab;
+  padding: 15px 0;
+  text-align: center;
+  bottom: 0;
+}
+p,a,i,li{
+  color: #f3e5ab;
+}

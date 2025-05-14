@@ -1,0 +1,177 @@
+<div class="container py-4">
+  <div class="row my-5">
+    <!-- Order Summary -->
+    <div class="col-md-4"
+    >
+      <div class="cart-summary-box">
+        <h5 class="mb-3">ملخص الطلب</h5>
+
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control promo-input mb-2"
+            placeholder="ادخل الكود"
+            [(ngModel)]="couponCode"
+            [disabled]="isCouponApplied"
+          />
+          <button
+            class="btn btn-primary w-100"
+            (click)="applyCoupon()"
+            [disabled]="isCouponApplied"
+          >
+            تطبيق
+          </button>
+          <div *ngIf="errorMessage" class="alert alert-danger mt-2">
+            {{ errorMessage }}
+          </div>
+          <div *ngIf="successMessage" class="alert alert-success mt-2">
+            {{ successMessage }}
+          </div>
+
+          <!-- عرض المجموع قبل وبعد الخصم -->
+          <div *ngIf="totalAfterDiscount > 0">
+            <p>الخصم: {{ discount }} جنيه</p>
+            <!-- <p>المجموع قبل الخصم: {{ subtotal }} جنيه</p> -->
+            <p>المجموع بعد الخصم: {{ totalAfterDiscount }} جنيه</p>
+          </div>
+        </div>
+
+        <!-- <a href="#" class="d-block mb-3 text-primary">مشاهدة العروض المتاحة</a> -->
+        <a (click)="cancelCoupon()" class="d-block mb-3 text-primary"
+          >مشاهدة العروض المتاحة</a
+        >
+
+        <!-- المجموع الفرعي وعدد المنتجات -->
+        <div class="d-flex justify-content-between mb-2">
+          <span>المجموع الفرعي ({{ cart.length }} منتج)</span>
+          <span>{{ subtotal }} جنيه</span>
+        </div>
+
+        <!-- رسوم الشحن -->
+        <div class="d-flex justify-content-between mb-2">
+          <span>رسوم الشحن</span>
+          <span class="text-green">مجانا</span>
+        </div>
+
+        <hr />
+
+        <!-- المجموع الكلي مع الخصم (إذا تم تطبيقه) -->
+        <div class="d-flex justify-content-between fw-bold fs-5">
+          <span>المجموع</span>
+          <span
+            >{{
+              totalAfterDiscount > 0 ? totalAfterDiscount : subtotal
+            }}
+            جنيه</span
+          >
+        </div>
+        <div class="bg-light p-2 rounded mt-3">
+          <span> شحن مجاني على الطلبات أكتر <strong>500</strong> جنيه</span>
+          <!-- <a href="#" class="text-warning fw-bold">عرض المزيد من التفاصيل</a> -->
+        </div>
+
+        <div class="bg-light p-2 rounded mt-3">
+          <span>خطط الدفع الشهرية تبدأ من <strong>500</strong> جنيه</span>
+          <a href="#" class="text-warning fw-bold">عرض المزيد من التفاصيل</a>
+        </div>
+
+        <button class="checkout-btn mt-3" [routerLink]="['/checkout']">
+          صفحة الدفع
+        </button>
+      </div>
+    </div>
+
+    <!-- Cart Items -->
+    <div class="col-md-8">
+      <h5 class="mb-4">
+        عربة التسوق
+        <span class="text-muted fs-6">({{ cart.length }} منتج)</span>
+      </h5>
+      <div
+        class="alert alert-info text-center mt-3"
+        *ngIf="subtotal > 0 && cart.length > 0"
+      >
+        {{ getProgressMessage() }}
+      </div>
+      <div
+        *ngIf="subtotal > 0 && cart.length > 0"
+        class="progress my-3"
+        role="progressbar"
+        aria-label="Basic example"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        [attr.aria-valuenow]="progressPercentage"
+      >
+        <div
+          class="progress-bar"
+          [style.width]="progressPercentage + '%'"
+          style="background-color: green"
+        ></div>
+      </div>
+
+      <div
+        *ngFor="let product of cart; let i = index"
+        class="bg-white p-3 rounded shadow-sm mb-4"
+      >
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex">
+            <img
+              [src]="
+                'http://127.0.0.1:8000/storage/products/' +
+                product.images[0].image
+              "
+              class="product-img mx-3"
+            />
+            <div>
+              <p class="mb-1 fw-bold">{{ product.name }}</p>
+              <p class="mb-1 text-muted">
+                اللون: {{ product.color || "غير محدد" }}
+              </p>
+              <div class="d-flex align-items-center mb-2">
+                <span *ngIf="product.oldPrice" class="text-warning me-2"
+                  >خصم</span
+                >
+                <span
+                  *ngIf="product.oldPrice"
+                  class="text-decoration-line-through text-muted"
+                  >{{ product.oldPrice }}</span
+                >
+              </div>
+              <span class="discount-tag">إكسبريس</span>
+              <p class="mb-0 text-green">توصيل مجاني</p>
+            </div>
+          </div>
+          <div class="text-end">
+            <p class="fw-bold fs-5 mb-2">{{ product.price }} جنيه</p>
+            <label for="quantity">الكمية</label>
+            <select
+              class="form-select w-auto d-inline-block"
+              style="width: 60px"
+              [(ngModel)]="product.quantity"
+              (change)="updateQuantity(i, product.quantity)"
+            >
+              <option *ngFor="let q of [1, 2, 3, 4, 5]" [value]="q">
+                {{ q }}
+              </option>
+            </select>
+            <button
+              class="btn btn-sm btn-outline-danger mx-2"
+              (click)="removeFromCart(product.id)"
+            >
+              حذف
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- عرض رسالة عندما تكون العربة فارغة -->
+      <div
+        *ngIf="cart.length === 0 && !this.authService.isLoggedIn()"
+        class="alert alert-warning text-center mt-3"
+      >
+        <p>
+          عربة التسوق الخاصة بك فارغة. لا تتردد في إضافة بعض العطور المميزة!
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

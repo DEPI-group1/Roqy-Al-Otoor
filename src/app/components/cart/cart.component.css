@@ -1,0 +1,9 @@
+    body { background-color: #f9f9f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .product-img { width: 100px; }
+    .btn-yellow { background-color: #ffe01b; color: black; border: none; }
+    .text-green { color: #00a651; }
+    .discount-tag { background-color: #ffe01b; font-weight: bold; padding: 2px 6px; border-radius: 5px; font-size: 14px; }
+    .cart-summary-box { background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .promo-input { border-radius: 0; }
+    .checkout-btn { background-color: #0055aa; color: white; border: none; width: 100%; padding: 10px; }
+    .yellow-banner { background-color: #ffe01b; border-radius: 10px; padding: 20px; }

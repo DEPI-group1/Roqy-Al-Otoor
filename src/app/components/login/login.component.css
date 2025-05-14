@@ -1,0 +1,21 @@
+body {
+  background: linear-gradient(to right, #f8f9fa, #e3f2fd);
+}
+.brand {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #9e8f52; /* لون ذهبي فاتح */
+}
+.login-container {
+  min-height: 100vh;
+}
+
+.card {
+  width: 100%;
+  max-width: 400px;
+}
+
+.input-group-text {
+  background-color: #e3f2fd;
+  border: none;
+}

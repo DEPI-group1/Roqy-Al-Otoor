@@ -1,0 +1,30 @@
+<!-- شريط التنقل السفلي -->
+<div class="bottom-nav" *ngIf="isMobile">
+  <a routerLink=""><i class="fa-solid fa-house"></i></a>
+  <a href="#"><i class="fa-solid fa-search"></i></a>
+  <a routerLink="cart" class="icon-badge">
+    <i class="fa-solid fa-cart-shopping"></i>
+
+    <span *ngIf="authServise.isLoggedIn() && cartCount > 0" class="badge">
+      {{ cartService.getProductCount() }}
+    </span>
+  </a>
+  <a routerLink="wishList" class="icon-badge">
+    <i class="fa-solid fa-heart"></i>
+    <span *ngIf="wishListCount > 0" class="badge">{{ wishListCount }}</span>
+  </a>
+  <a
+    routerLink="profile"
+    *ngIf="authServise.isLoggedIn()"
+    (click)="handleProfileClick()"
+    ><i class="fa-solid fa-user"></i
+  ></a>
+
+  <a
+    routerLink="login"
+    *ngIf="!authServise.isLoggedIn()"
+    (click)="handleProfileClick()"
+  >
+    <i class="fas fa-sign-in-alt"></i>
+  </a>
+</div>

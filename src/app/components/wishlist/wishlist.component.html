@@ -1,0 +1,33 @@
+<div class="wishlist-container">
+  <h2 class="wishlist-title">🛍️ قائمة الأمنيات</h2>
+
+  <!-- إذا كانت القائمة فارغة -->
+  <div *ngIf="wishlist.length === 0" class="empty-message">
+    <p>📌 لم تقم بإضافة أي منتجات إلى قائمة الأمنيات بعد!</p>
+  </div>
+
+  <!-- عرض المنتجات -->
+  <div class="wishlist-grid" *ngIf="wishlist.length > 0">
+    <div *ngFor="let product of wishlist" class="wishlist-item">
+      <img
+        *ngIf="product.images && product.images.length > 0"
+        [src]="
+          'http://127.0.0.1:8000/storage/products/' + product.images[0].image
+        "
+        alt="منتج"
+        class="wishlist-image"
+      />
+      <div class="wishlist-details">
+        <h4>{{ product.name }}</h4>
+        <p class="wishlist-price">{{ product.price }} جنيه</p>
+      </div>
+      <button class="btn addToCart-btn btn-success" (click)="addToCart(product)">
+        اضافة للعربة
+      </button>
+
+      <button class="remove-btn" (click)="removeFromWishlist(product.id)">
+        ❌ إزالة
+      </button>
+    </div>
+  </div>
+</div>

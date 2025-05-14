@@ -1,0 +1,85 @@
+<div class="container py-3">
+  <!-- حالة عدم وجود منتج -->
+  <div *ngIf="!isLoading && !product" class="alert alert-warning text-center">
+    المنتج غير متوفر
+  </div>
+
+  <!-- عرض المنتج -->
+  <div *ngIf="!isLoading && product" class="row g-3 p-2 my-3">
+    <!-- قسم الصور -->
+    <div class="col-md-6 images-section">
+      <!-- الصورة الرئيسية -->
+      <div
+        class="d-flex justify-content-center align-items-center mb-3"
+        style="height: 400px; background: #ffffff"
+      >
+        <img
+          [src]="'http://127.0.0.1:8000/storage/products/' + mainImage"
+          class="img-fluid rounded shadow-sm"
+          [alt]="product?.name"
+          style="max-height: 100%; object-fit: contain; width: auto"
+          *ngIf="mainImage"
+        />
+        <div *ngIf="!mainImage" class="text-muted">
+          <i class="bi bi-image fs-1"></i>
+          <p>لا توجد صورة متاحة</p>
+        </div>
+      </div>
+
+      <!-- الصور المصغرة -->
+      <div
+        *ngIf="product?.images?.length > 1"
+        class="d-flex flex-wrap gap-2 justify-content-center"
+      >
+        <div
+          *ngFor="let img of product.images"
+          class="thumbnail"
+          (click)="changeMainImage(img.image)"
+        >
+          <!-- استخدم lazy loading للصور المصغرة -->
+          <img
+            [src]="'http://127.0.0.1:8000/storage/products/' + img.image"
+            loading="lazy"
+            class="img-thumbnail cursor-pointer"
+            [class.border-primary]="img.image === mainImage"
+            alt="thumbnail"
+            style="width: 80px; height: 80px; object-fit: cover"
+          />
+        </div>
+      </div>
+    </div>
+    <!-- قسم التفاصيل -->
+    <div class="col-md-6 d-flex flex-column justify-content-center">
+      <div>
+        <h2 class="fw-bold mb-3 text-primary">{{ product.name }}</h2>
+        <h4 class="text-success mb-3">السعر: {{ product.price }} EGP</h4>
+        <p class="text-muted mb-4">{{ product.description }}</p>
+
+        <ul class="list-unstyled mb-4">
+          <li class="mb-2">
+            <i class="bi bi-check-circle-fill text-success me-2"></i> متوفر
+            حالياً
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-truck text-primary me-2"></i> شحن سريع خلال 2-3 أيام
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-shield-check text-warning me-2"></i> ضمان لمدة سنة
+          </li>
+        </ul>
+      </div>
+
+      <div class="buttons-container">
+        <button
+          class="btn btn-primary w-100 mb-3 py-2"
+          (click)="addToCart(product)"
+        >
+          أضف إلى السلة
+        </button>
+        <a href="/products" class="btn btn-outline-secondary w-100 py-2">
+          رجوع للمنتجات
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

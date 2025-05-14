@@ -1,0 +1,53 @@
+<div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+  <div class="card shadow p-4" style="min-width: 350px; max-width: 400px; width: 100%;">
+    <h4 class="mb-4 text-center">تسجيل الدخول</h4>
+
+    <form (ngSubmit)="login()" #loginForm="ngForm" novalidate>
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">البريد الإلكتروني</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          [(ngModel)]="email"
+          required
+        />
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password" class="form-label">كلمة المرور</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          [(ngModel)]="password"
+          required
+        />
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="alert alert-danger text-center">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Forgot password -->
+      <div class="mb-1 text-end">
+        <a href="#" class="text-decoration-none small">نسيت كلمة المرور؟</a>
+      </div>
+      <!-- create account -->
+      <div class="mb-3 text-end">
+        <a routerLink="/register" class="text-decoration-none small">ليس لديك حساب؟ أنشئ واحد الآن</a>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="btn btn-primary w-100" [disabled]="loading">
+        <span *ngIf="!loading">تسجيل الدخول</span>
+        <span *ngIf="loading"><i class="fas fa-spinner fa-spin"></i> جاري الدخول...</span>
+      </button>
+    </form>
+  </div>
+</div>
